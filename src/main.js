@@ -15,15 +15,6 @@ Vue.prototype.coustomApi = {
       "getChannel": "/channel",
       "searchNews": "/newSearch"
   },
-  "coustomRequest": function(config, success, fail) {
-    this.axios(config)
-          .then(function(response) {
-              success(response);
-          })
-          .catch(function (error) {
-              fail(error);
-          });
-  }
 };
 
 /* eslint-disable no-new */

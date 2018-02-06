@@ -2,11 +2,11 @@
     <div class="news">
         <section>
             <ul class="news-types">
-                <li class="news-item">
-                    <a href=""></a>
+                <li class="news-item" v-for="(item, index) in newsTypes" :key="index">
+                    <router-link :to="{name: 'channel', params:{ channel: item }}">{{ item }}</router-link>
                 </li>
             </ul>
-            <div></div>
+            <router-view></router-view>
         </section>
     </div>
 </template>
@@ -20,25 +20,21 @@
             }
         },
         created: function() {
-            // let config = {
-            //     url: this.coustomApi.api.getChannel,
-            //     baseURL: '/api',
-            //     method: 'POST',
-            //     data: {
-            //         'appkey': '1e58cd8eefb3ed489f9f3ddc00ad5486'
-            //     }
-            // }
-            // let newTypes = this.coustomApi.coustomRequest(config, function(data) {
-            //     console.log(data);
-            // }, function(error) {
-            //     console.log(error);
-            // })
-            this.axios({
-                method: 'post',
-                url: 'api/channel',
+            //这里其实可以本地存储一下信息的
+            let config = {
+                url: this.coustomApi.api.getChannel,
+                baseURL: '/api',
+                method: 'POST',
                 params: {
-                    appkey: '1e58cd8eefb3ed489f9f3ddc00ad5486'
+                    'appkey': '1e58cd8eefb3ed489f9f3ddc00ad5486'
                 }
+            }
+            this.axios(config).then((res)=>{
+                //此新闻中没有全部的频道
+                //res.data.result.result.unshift('全部');
+                this.newsTypes = res.data.result.result;
+            }).catch((error)=>{
+                console.log(error);
             });
         }
     }
@@ -51,16 +47,25 @@
     }
     ul.news-types {
         display: flex;
+        flex-wrap: wrap;
         width: 100%;
     }
+    ul.news-types li {
+        margin: 15px 15px;
+    }
     li.news-item a {
-        padding: 8px 15px;
+        padding: 6px 20px;
         border: 1px solid #E0E0E0;
         border-radius: 30px;
         color: #424242;
         transition: .5s all;
     }
     li.news-item a:hover {
+        background: #673AB7;
+        border-color: #673AB7;
+        color: #ffffff;
+    }
+    li.news-item a.router-link-active {
         background: #673AB7;
         border-color: #673AB7;
         color: #ffffff;

@@ -3,7 +3,7 @@
         <a class="brand" href="">{{ siteName }}</a>
         <ul class="menus">
             <li v-for="(menu, index) in menus" :key="index">
-                <a href="">{{ menu.title }}</a>
+                <router-link :to="menu.url">{{ menu.title }}</router-link>
             </li>
         </ul>
     </div>
@@ -16,10 +16,22 @@
             return {
                 siteName: "coolMox",
                 menus: [
-                    {title: "新闻"},
-                    {title: "资料"},
-                    {title: "作品"},
-                    {title: "关于我"}
+                    {
+                        title: "新闻",
+                        url: '/news'
+                    },
+                    {
+                        title: "资料",
+                        url: '/material'
+                    },
+                    {
+                        title: "作品",
+                        url: '/works'
+                    },
+                    {
+                        title: "关于我",
+                        url: '/about'
+                    }
                 ]
             }
         }
