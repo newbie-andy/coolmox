@@ -42,7 +42,6 @@
 
 <style scoped>
     .news {
-        display: flex;
         flex-direction: column;
     }
     ul.news-types {

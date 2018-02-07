@@ -16,13 +16,5 @@
 </script>
 
 <style scoped>
-    .footer{
-        width: 100%;
-        display: flex;
-        height: 80px;
-        align-items: center;
-        justify-content: center;
-        background: #212121;
-        color: #CCCCCC;
-    }
+
 </style>

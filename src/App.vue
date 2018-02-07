@@ -24,16 +24,15 @@ export default {
   margin: 0;
 }
 html,body {
-  height: 100%;
   width: 100%;
+  height: 100%;
+  background: #f0f0f0;
 }
 #app {
-  height: inherit;
+  min-height: 100%;
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
   display: flex;
   flex-direction: column;
 }
@@ -45,8 +44,14 @@ html,body {
   flex: 1;
   padding: 50px;
 }
-#footer {
-  display: flex;
+#footer{
+    width: 100%;
+    display: flex;
+    height: 80px;
+    align-items: center;
+    justify-content: center;
+    background: #212121;
+    color: #CCCCCC;
 }
 ul {
   list-style: none;
