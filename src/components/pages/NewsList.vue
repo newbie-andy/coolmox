@@ -31,7 +31,6 @@
             }
             this.axios(config).then((res)=>{
                 //此新闻中没有全部的频道
-                //res.data.result.result.unshift('全部');
                 this.newsTypes = res.data.result.result;
             }).catch((error)=>{
                 console.log(error);
@@ -53,6 +52,8 @@
         margin: 15px 15px;
     }
     li.news-item a {
+        height: 66px;
+        line-height: 60px;
         padding: 6px 20px;
         border: 1px solid #E0E0E0;
         border-radius: 30px;

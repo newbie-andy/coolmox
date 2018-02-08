@@ -10,12 +10,19 @@ Vue.config.productionTip = false
 Vue.use(VueAxios, axios)
 
 Vue.prototype.coustomApi = {
+  "appcode":"1e58cd8eefb3ed489f9f3ddc00ad5486",
   "api": {
       "getNews": "/get",
       "getChannel": "/channel",
       "searchNews": "/newSearch"
   },
 };
+Vue.filter('substring', function (value,length) {
+  if (!value) return '';
+  if(value.lenght > length) {
+    value = value.substring(0, 10); 
+  }
+})
 
 /* eslint-disable no-new */
 new Vue({

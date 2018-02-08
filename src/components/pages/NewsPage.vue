@@ -3,11 +3,20 @@
         <section>
            <div class="news-list">
             <article v-for="(value, index) in news" :key="index">
-                <div class="left">
-                    <img :src="value.pic"/>
+                <div class="left bgsize"
+                    :style="{background: 'url('+value.pic+') center center/cover no-repeat'}">
+                    
                 </div>
                 <div class="right">
-                    <p>{{ value.title }}</p>
+                    <div class="news-title">
+                        <span class="category">{{ value.category }}</span>
+                        <span>{{ value.title }}</span>
+                    </div>
+                    <div class="out-message">
+                        <span v-if="value.src">{{ value.src }}</span>
+                        <span v-else>{{ '无出处' }}</span>
+                        <span>{{ value.time }}</span>
+                    </div>
                 </div>
             </article>
            </div>
@@ -38,14 +47,13 @@
                     method: 'POST',
                     params: {
                         'channel': this.$route.params.channel,
-                        'num': 30,
+                        'num': 15,
                         'start': 0,
-                        'appkey': '1e58cd8eefb3ed489f9f3ddc00ad5486'
+                        'appkey': this.coustomApi.appcode
                     }
                 }
                 this.axios(config).then((res)=>{
                     //加载的动画执行成，并提示用户数据加载成功
-                    console.log(res.data.result.result.list);
                     this.news = res.data.result.result.list;
                 }).catch((error)=>{
                     console.log(error);
@@ -77,11 +85,30 @@
        overflow: hidden;
    }
    .news-list article>.right {
-       text-align: justify;
        padding: 5px 5px;
+   }
+   .news-list article>.right>.news-title {
+       display: -webkit-box;
+       text-overflow:ellipsis;
+       -webkit-line-clamp: 1;  /*限制在一个块元素显示的文本的行数*/
+       -webkit-box-orient: vertical;
        overflow: hidden;
    }
-   .news-list article>.left img {
-       height: 100%;
+   .category {
+       padding: 1px 3px;
+       border-radius: 3px;
+       background: #673AB7;
+       color: #fff;
+       border: 1px solid #673AB7;
    }
+   .out-message {
+       display: flex;
+       justify-content: space-between;
+       font-size: 14px;
+       margin-top: 5px;
+       color:#424242;
+   }
+   .out-message>span {
+       line-height: 20px;
+   } 
 </style>
