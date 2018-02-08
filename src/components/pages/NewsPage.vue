@@ -5,7 +5,6 @@
             <article v-for="(value, index) in news" :key="index">
                 <div class="left bgsize"
                     :style="{background: 'url('+value.pic+') center center/cover no-repeat'}">
-                    
                 </div>
                 <div class="right">
                     <div class="news-title">
@@ -20,6 +19,10 @@
                 </div>
             </article>
            </div>
+           <article class="load-more">
+             <span id="load-sign"></span>
+             <span>正在努力的加载中...</span>
+           </article>
         </section>
     </div>
 </template>
@@ -29,32 +32,55 @@
         name: "NewsPage",
         data() {
             return {
-               news: []
-            }
-        },
-        created: function() {
-           
-        },
-        watch: {
-            '$route': 'fetchData'
-        },
-        methods: {
-            fetchData() {
-                //这里预留加载的动画
-                let config = {
+               fetching: false,
+               config: {
                     url: this.coustomApi.api.getNews,
                     baseURL: '/api',
                     method: 'POST',
                     params: {
-                        'channel': this.$route.params.channel,
-                        'num': 15,
+                        'channel': '',
+                        'num': 20,
                         'start': 0,
                         'appkey': this.coustomApi.appcode
-                    }
+                    },
+                    page: 0,
+               },
+               news: []
+            }
+        },
+        created: function() {
+           this.getByChangeChannel();
+           document.addEventListener('scroll', () => {
+               var docuemntHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+               var dynamicScrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+               var clientHeight = document.documentElement.clientHeight || document.body.clientHeight;
+               if((dynamicScrollTop + clientHeight + 300 >= docuemntHeight) && !this.fetching) {
+                   this.config.params.start = (++this.config.page) * this.config.params.num;
+                   this.fetchData();
+               }
+           })
+        },
+        watch: {
+            '$route': 'getByChangeChannel'
+        },
+        methods: {
+            getByChangeChannel() {
+                this.config.params.channel = this.$route.params.channel;
+                this.config.page = 0;
+                this.news = [];
+                this.fetchData();
+            },
+            fetchData() {
+                if(this.fetching) {
+                    return;
+                }else{
+                    this.fetching = true;
                 }
-                this.axios(config).then((res)=>{
+                //这里预留加载的动画
+                this.axios(this.config).then((res)=>{
                     //加载的动画执行成，并提示用户数据加载成功
-                    this.news = res.data.result.result.list;
+                    this.news = this.news.concat(res.data.result.result.list);
+                    this.fetching = false;
                 }).catch((error)=>{
                     console.log(error);
                 });
@@ -111,4 +137,13 @@
    .out-message>span {
        line-height: 20px;
    } 
+   .load-more {
+       display: flex;
+       justify-content: center;
+   }
+   .load-more span:nth-child(2) {
+       padding: 5px 20px;
+       box-shadow: 0 0 16px 2px rgb(195, 195, 195);
+       background: #ffffff;
+   }
 </style>
