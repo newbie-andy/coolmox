@@ -21,12 +21,16 @@
                         url: '/news'
                     },
                     {
+                        title: "博客",
+                        url: '/blogs'
+                    },
+                    {
                         title: "资料",
-                        url: '/material'
+                        url: '/materials'
                     },
                     {
                         title: "作品",
-                        url: '/works'
+                        url: '/projects'
                     },
                     {
                         title: "关于我",
