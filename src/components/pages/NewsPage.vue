@@ -2,7 +2,7 @@
     <div class="news-page">
         <section>
            <div class="news-list">
-            <article v-for="(value, index) in news" :key="index">
+            <article v-for="(value, index) in news" :key="index" @click="pushTo(value)">
                 <div class="left bgsize"
                     :style="{background: 'url('+value.pic+') center center/cover no-repeat'}">
                 </div>
@@ -83,6 +83,15 @@
                     this.fetching = false;
                 }).catch((error)=>{
                     console.log(error);
+                });
+            },
+            pushTo(params) {
+                this.$router.push({
+                    name: 'detail',
+                    params: {
+                        newProps: params,
+                        title: params.title
+                    }
                 });
             }
         }
