@@ -71,7 +71,7 @@ export default {
     .blog-item {
         display: flex;
         flex-direction: column;
-        margin-bottom: 15px;
+        margin-bottom: 30px;
         padding: 20px;
         border-radius: 14px 0 0 0;
         box-shadow: 0 0 16px 2px rgb(195, 195, 195);

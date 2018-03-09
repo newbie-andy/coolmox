@@ -23,7 +23,7 @@
             //这里其实可以本地存储一下信息的
             let config = {
                 url: this.coustomApi.api.getChannel,
-                baseURL: '/api',
+                baseURL: 'https://way.jd.com/jisuapi/',
                 method: 'POST',
                 params: {
                     'appkey': '1e58cd8eefb3ed489f9f3ddc00ad5486'

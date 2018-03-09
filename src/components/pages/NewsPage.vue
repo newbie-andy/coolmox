@@ -35,7 +35,7 @@
                fetching: false,
                config: {
                     url: this.coustomApi.api.getNews,
-                    baseURL: '/api',
+                    baseURL: 'https://way.jd.com/jisuapi/',
                     method: 'POST',
                     params: {
                         'channel': '',
