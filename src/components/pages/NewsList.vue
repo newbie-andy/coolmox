@@ -25,6 +25,9 @@
                 url: this.coustomApi.api.getChannel,
                 baseURL: 'https://way.jd.com/jisuapi/',
                 method: 'POST',
+                header:{
+                    'Access-Control-Allow-Origin': '*',
+                },
                 params: {
                     'appkey': '1e58cd8eefb3ed489f9f3ddc00ad5486'
                 }
