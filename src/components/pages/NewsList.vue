@@ -24,9 +24,9 @@
             let config = {
                 url: this.coustomApi.api.getChannel,
                 baseURL: 'https://way.jd.com/jisuapi/',
-                method: 'POST',
+                method: 'GET',
                 headers:{
-                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Origin': 'www.tongyiban.wang',
                 },
                 params: {
                     'appkey': '1e58cd8eefb3ed489f9f3ddc00ad5486'
