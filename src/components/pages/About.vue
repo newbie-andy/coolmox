@@ -1,6 +1,6 @@
 <template>
   <div>
-    关于我
+    关于我,我是一名程序员
   </div>
 </template>
 
